@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kitty Ledger</title>
+<meta name="description" content="Public ledger of a community campaign on Stellar: every contribution, every committee approval, every payout receipt, verifiable on chain.">
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb;
+    --surface-2: #f2f1ee;
+    --border: #d9d8d2;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #7a7974;
+    --accent: #2a78d6;
+    --accent-track: #cfe0f6;
+    --good: #0ca30c;
+    --warning: #fab219;
+    --serious: #eb6834;
+    --critical: #e34948;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --surface-1: #1a1a19;
+      --surface-2: #242423;
+      --border: #3a3a38;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted: #8f8e86;
+      --accent: #3987e5;
+      --accent-track: #253a56;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1: #1a1a19;
+    --surface-2: #242423;
+    --border: #3a3a38;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #8f8e86;
+    --accent: #3987e5;
+    --accent-track: #253a56;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--surface-1);
+    color: var(--text-primary);
+    font-family: var(--sans);
+    line-height: 1.45;
+  }
+  main { max-width: 1040px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  h2 { font-size: 16px; margin: 32px 0 8px; }
+  p.lede { color: var(--text-secondary); margin: 0 0 20px; }
+  a { color: var(--accent); }
+  form.connect {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px;
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 14px;
+  }
+  form.connect label { font-size: 13px; color: var(--text-secondary); display: flex; flex-direction: column; gap: 4px; }
+  form.connect input, form.connect select {
+    font: inherit; padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px;
+    background: var(--surface-1); color: var(--text-primary); width: 100%;
+  }
+  form.connect .row { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  button {
+    font: inherit; padding: 8px 14px; border-radius: 6px; border: 1px solid var(--border);
+    background: var(--surface-1); color: var(--text-primary); cursor: pointer;
+  }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  #status { font-size: 13px; color: var(--text-secondary); min-height: 1.4em; }
+  #status.error { color: var(--critical); }
+  .hero { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 16px; margin-top: 24px; align-items: end; }
+  .hero-figure { font-size: 48px; font-weight: 600; line-height: 1.05; letter-spacing: -0.01em; }
+  .hero-label { font-size: 13px; color: var(--text-secondary); }
+  .meter { margin-top: 10px; }
+  .meter .track { height: 10px; border-radius: 5px; background: var(--accent-track); overflow: hidden; }
+  .meter .fill { height: 100%; background: var(--accent); border-radius: 5px 0 0 5px; width: 0; transition: width .4s ease; }
+  .meter .fill.full { border-radius: 5px; }
+  .meter .caption { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 16px; }
+  .tile { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+  .tile .label { font-size: 12px; color: var(--text-secondary); }
+  .tile .value { font-size: 22px; font-weight: 600; margin-top: 2px; }
+  .tile .sub { font-size: 12px; color: var(--text-muted); }
+  .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-1); }
+  .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-muted); }
+  .badge.open .dot { background: var(--accent); }
+  .badge.funded .dot, .badge.paid .dot { background: var(--good); }
+  .badge.refunding .dot { background: var(--warning); }
+  .badge.closed .dot { background: var(--text-muted); }
+  .badge.pending .dot { background: var(--warning); }
+  .badge.rejected .dot { background: var(--critical); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { font-size: 12px; color: var(--text-secondary); font-weight: 600; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.mono { font-family: var(--mono); font-size: 12px; word-break: break-all; }
+  .muted { color: var(--text-muted); }
+  .approvers { display: flex; flex-wrap: wrap; gap: 4px; }
+  .approvers span { font-size: 12px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px; }
+  .table-wrap { overflow-x: auto; }
+  .footer { margin-top: 40px; font-size: 12px; color: var(--text-muted); }
+  .hidden { display: none; }
+  @media (max-width: 720px) {
+    form.connect { grid-template-columns: 1fr; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-figure { font-size: 40px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Kitty Ledger</h1>
+  <p class="lede">The public ledger of a community campaign on Stellar. Everything below is read straight from the campaign contract; nothing is stored on a server.</p>
+
+  <form class="connect" id="connect" autocomplete="off">
+    <label>Campaign contract id
+      <input id="contractId" placeholder="C…" spellcheck="false">
+    </label>
+    <label>Campaign number
+      <input id="campaignId" type="number" min="0" value="0">
+    </label>
+    <label>Soroban RPC URL
+      <input id="rpcUrl" value="https://soroban-testnet.stellar.org" spellcheck="false">
+    </label>
+    <label>Network
+      <select id="network">
+        <option value="testnet">Testnet</option>
+        <option value="public">Mainnet (public)</option>
+      </select>
+    </label>
+    <label>Display names (optional JSON map address → name)
+      <input id="namesFile" type="file" accept="application/json">
+    </label>
+    <label>Snapshot from <code>kitty export --json</code> (offline view)
+      <input id="snapshotFile" type="file" accept="application/json">
+    </label>
+    <div class="row">
+      <button type="submit" class="primary" id="loadBtn">Load from chain</button>
+      <button type="button" id="refreshBtn">Refresh</button>
+      <span id="status"></span>
+    </div>
+  </form>
+
+  <section id="view" class="hidden">
+    <div class="hero">
+      <div>
+        <div class="hero-label">Raised so far</div>
+        <div class="hero-figure" id="raised">0.00</div>
+        <div class="hero-label"><span id="stateBadge" class="badge"><span class="dot"></span><span id="stateText"></span></span></div>
+      </div>
+      <div class="meter" role="meter" aria-labelledby="meterLabel" aria-valuemin="0" id="meter">
+        <div class="track"><div class="fill" id="meterFill"></div></div>
+        <div class="caption"><span id="meterLabel">of goal</span><span id="meterRight"></span></div>
+      </div>
+    </div>
+
+    <div class="tiles">
+      <div class="tile"><div class="label">Contributions</div><div class="value" id="tileContribs">0</div><div class="sub" id="tileContributors"></div></div>
+      <div class="tile"><div class="label">Paid to billers</div><div class="value" id="tilePaid">0.00</div><div class="sub" id="tileReceipts"></div></div>
+      <div class="tile"><div class="label">Held in contract</div><div class="value" id="tileHeld">0.00</div><div class="sub" id="tileRefunded"></div></div>
+      <div class="tile"><div class="label">Committee</div><div class="value" id="tileCommittee"></div><div class="sub" id="tileDeadline"></div></div>
+    </div>
+
+    <p class="muted" style="margin-top:12px">
+      Verify on Stellar: <a id="verifyContract" target="_blank" rel="noopener"></a>
+      · reconciles: <span id="reconciles"></span>
+      · <span id="fetchedAt"></span>
+    </p>
+
+    <h2>Payouts and receipts</h2>
+    <div class="table-wrap">
+      <table id="payoutsTable">
+        <thead><tr><th>#</th><th>Biller</th><th class="num">Amount</th><th>Approvals</th><th>Status</th><th>Receipt</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <h2>Every contribution</h2>
+    <div class="table-wrap">
+      <table id="contribsTable">
+        <thead><tr><th>#</th><th>When (UTC)</th><th>From</th><th class="num">Amount</th><th>Memo hash</th><th>Verify</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <h2>Committee</h2>
+    <div class="table-wrap">
+      <table id="committeeTable">
+        <thead><tr><th>Member</th><th>Address</th><th>Verify</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <p class="footer">
+    Amounts are in the campaign token (USDC has 7 decimals) and are computed with integer arithmetic.
+    Memo and purpose hashes are sha256 of the note text; contributors can recompute theirs.
+    "Verify on Stellar" links open stellar.expert, which reads the same chain state independently of this page.
+  </p>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@stellar/stellar-sdk@17.1.0/dist/stellar-sdk.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  const $ = (id) => document.getElementById(id);
+  const UNIT = 10000000n;
+  const NULL_ACCOUNT = "GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWHF";
+  const PASSPHRASE = {
+    testnet: "Test SDF Network ; September 2015",
+    public: "Public Global Stellar Network ; September 2015",
+  };
+  let names = {};
+  let snapshot = null;
+
+  // ---------------------------------------------------------- formatting (mirrors app/src/amounts.ts)
+  function formatUnits(stroops) {
+    const neg = stroops < 0n; const abs = neg ? -stroops : stroops;
+    const whole = abs / UNIT;
+    let frac = (abs % UNIT).toString().padStart(7, "0").replace(/0+$/, "");
+    if (frac.length < 2) frac = frac.padEnd(2, "0");
+    return (neg ? "-" : "") + whole.toString() + "." + frac;
+  }
+  function money(stroops) {
+    const [w, f] = formatUnits(stroops).split(".");
+    return w.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "." + f;
+  }
+  function short(a) { return a && a.length > 12 ? a.slice(0, 4) + "…" + a.slice(-4) : (a || ""); }
+  function nameOf(a) { return names[a] || short(a); }
+  function iso(ts) { return ts ? new Date(Number(ts) * 1000).toISOString().replace("T", " ").slice(0, 19) : ""; }
+  function explorer(network) { return "https://stellar.expert/explorer/" + (network === "public" ? "public" : "testnet"); }
+  function accountLink(network, a) { return explorer(network) + (a.startsWith("C") ? "/contract/" : "/account/") + a; }
+  function el(tag, attrs, children) {
+    const e = document.createElement(tag);
+    for (const k in (attrs || {})) { if (k === "class") e.className = attrs[k]; else if (k === "text") e.textContent = attrs[k]; else e.setAttribute(k, attrs[k]); }
+    (children || []).forEach((c) => e.appendChild(typeof c === "string" ? document.createTextNode(c) : c));
+    return e;
+  }
+  function link(network, a, text) { return el("a", { href: accountLink(network, a), target: "_blank", rel: "noopener", text: text || "verify" }); }
+  function setStatus(msg, isError) { const s = $("status"); s.textContent = msg; s.className = isError ? "error" : ""; }
+
+  // ---------------------------------------------------------- reading chain state
+  function sdk() {
+    if (!window.StellarSdk) throw new Error("Stellar SDK did not load (offline?). Use a snapshot file instead.");
+    return window.StellarSdk;
+  }
+  async function simulate(server, passphrase, contractId, method, args) {
+    const S = sdk();
+    const op = new S.Contract(contractId).call(method, ...args);
+    const tx = new S.TransactionBuilder(new S.Account(NULL_ACCOUNT, "0"), { fee: "100", networkPassphrase: passphrase })
+      .addOperation(op).setTimeout(60).build();
+    const sim = await server.simulateTransaction(tx);
+    if (S.rpc.Api.isSimulationError(sim)) throw new Error(method + ": " + sim.error);
+    if (!sim.result) throw new Error(method + ": no result");
+    return S.scValToNative(sim.result.retval);
+  }
+  const u32 = (n) => sdk().nativeToScVal(Number(n), { type: "u32" });
+  const enumName = (v) => Array.isArray(v) ? String(v[0]) : String(v);
+  const hex = (b) => (b && b.length !== undefined && typeof b !== "string") ? Array.from(b, (x) => x.toString(16).padStart(2, "0")).join("") : String(b || "");
+
+  async function loadFromChain() {
+    const S = sdk();
+    const contractId = $("contractId").value.trim();
+    const campaignId = Number($("campaignId").value || 0);
+    const rpcUrl = $("rpcUrl").value.trim();
+    const network = $("network").value;
+    if (!contractId) throw new Error("enter the campaign contract id");
+    const server = new S.rpc.Server(rpcUrl, { allowHttp: rpcUrl.startsWith("http://") });
+    const passphrase = PASSPHRASE[network];
+    setStatus("reading campaign…");
+    const c = await simulate(server, passphrase, contractId, "campaign", [u32(campaignId)]);
+    const campaign = {
+      organizer: String(c.organizer), token: String(c.token), goal: BigInt(c.goal), raised: BigInt(c.raised),
+      deadline: Number(c.deadline), committee: c.committee.map(String), threshold: Number(c.threshold),
+      registry: String(c.registry), state: enumName(c.state), title_hash: hex(c.title_hash),
+      paid_out: BigInt(c.paid_out), refunded: BigInt(c.refunded), contribution_count: Number(c.contribution_count),
+      payout_count: Number(c.payout_count), created_at: Number(c.created_at),
+    };
+    const contributions = [];
+    for (let start = 0; start < campaign.contribution_count; start += 100) {
+      setStatus("reading contributions " + start + "…");
+      const page = await simulate(server, passphrase, contractId, "contributions", [u32(campaignId), u32(start), u32(100)]);
+      page.forEach((e, i) => contributions.push({ index: start + i, from: String(e.from), amount: BigInt(e.amount), memo_hash: hex(e.memo_hash), ledger_time: Number(e.ledger_time) }));
+    }
+    setStatus("reading payouts…");
+    const payouts = (await simulate(server, passphrase, contractId, "payouts", [u32(campaignId)])).map((p) => ({
+      id: Number(p.id), biller_id: Number(p.biller_id), amount: BigInt(p.amount), purpose_hash: hex(p.purpose_hash),
+      approvals: p.approvals.map(String), executed: Boolean(p.executed), proposer: String(p.proposer),
+      paid_to: p.paid_to === null || p.paid_to === undefined ? null : String(p.paid_to), executed_at: Number(p.executed_at),
+    }));
+    return { network, contractId, campaignId, fetchedAt: new Date().toISOString(), campaign, contributions, payouts };
+  }
+
+  function reviveSnapshot(doc) {
+    const big = (v) => BigInt(v);
+    if (!doc || !doc.contractId || !doc.campaign || !Array.isArray(doc.contributions)) throw new Error("not a kitty-ledger snapshot (use kitty status --json)");
+    return {
+      network: doc.network, contractId: doc.contractId, campaignId: Number(doc.campaignId), fetchedAt: doc.fetchedAt,
+      campaign: Object.assign({}, doc.campaign, { goal: big(doc.campaign.goal), raised: big(doc.campaign.raised), paid_out: big(doc.campaign.paid_out), refunded: big(doc.campaign.refunded) }),
+      contributions: doc.contributions.map((x) => Object.assign({}, x, { amount: big(x.amount) })),
+      payouts: doc.payouts.map((p) => Object.assign({}, p, { amount: big(p.amount) })),
+    };
+  }
+
+  // ---------------------------------------------------------- rendering
+  function render(s) {
+    snapshot = s;
+    const c = s.campaign;
+    const held = c.raised - c.paid_out - c.refunded;
+    const receipts = s.payouts.filter((p) => p.executed);
+    const receiptsTotal = receipts.reduce((a, p) => a + p.amount, 0n);
+    const ledgerTotal = s.contributions.reduce((a, x) => a + x.amount, 0n);
+    const reconciles = receiptsTotal === c.paid_out && ledgerTotal === c.raised;
+    const pct = c.goal > 0n ? Number((c.raised * 10000n) / c.goal) / 100 : 0;
+
+    $("raised").textContent = money(c.raised);
+    $("stateText").textContent = c.state + (c.state === "Funded" ? " · goal reached" : "");
+    $("stateBadge").className = "badge " + c.state.toLowerCase();
+    const fill = $("meterFill");
+    fill.style.width = Math.min(100, pct) + "%";
+    fill.classList.toggle("full", pct >= 100);
+    $("meter").setAttribute("aria-valuenow", String(Math.min(100, pct)));
+    $("meter").setAttribute("aria-valuemax", "100");
+    $("meterLabel").textContent = pct.toFixed(2) + "% of goal " + money(c.goal);
+    $("meterRight").textContent = "deadline " + iso(c.deadline);
+
+    const contributors = new Set(s.contributions.map((x) => x.from)).size;
+    $("tileContribs").textContent = String(s.contributions.length);
+    $("tileContributors").textContent = contributors + " addresses";
+    $("tilePaid").textContent = money(c.paid_out);
+    $("tileReceipts").textContent = receipts.length + " receipt" + (receipts.length === 1 ? "" : "s") + " of " + s.payouts.length + " proposal" + (s.payouts.length === 1 ? "" : "s");
+    $("tileHeld").textContent = money(held);
+    $("tileRefunded").textContent = "refunded " + money(c.refunded);
+    $("tileCommittee").textContent = c.threshold + " of " + c.committee.length;
+    $("tileDeadline").textContent = "approvals needed per payout";
+
+    const verify = $("verifyContract");
+    verify.href = explorer(s.network) + "/contract/" + s.contractId;
+    verify.textContent = short(s.contractId) + " on stellar.expert";
+    $("reconciles").textContent = reconciles ? "yes (receipts = paid out, ledger = raised)" : "NO - mismatch, do not trust this view";
+    $("fetchedAt").textContent = "read " + (s.fetchedAt || "").replace("T", " ").slice(0, 19) + " UTC";
+
+    const pt = $("payoutsTable").querySelector("tbody"); pt.textContent = "";
+    if (!s.payouts.length) pt.appendChild(el("tr", {}, [el("td", { colspan: "6", class: "muted", text: "No payout proposed yet." })]));
+    for (const p of s.payouts) {
+      const status = p.executed ? el("span", { class: "badge paid" }, [el("span", { class: "dot" }), "paid " + iso(p.executed_at)])
+        : el("span", { class: "badge pending" }, [el("span", { class: "dot" }), "needs " + Math.max(0, c.threshold - p.approvals.length) + " more"]);
+      const approvers = el("div", { class: "approvers" }, p.approvals.map((a) => el("span", { title: a, text: nameOf(a) })));
+      const receipt = p.executed && p.paid_to
+        ? el("span", {}, [nameOf(p.paid_to), " ", link(s.network, p.paid_to)])
+        : el("span", { class: "muted", text: "—" });
+      pt.appendChild(el("tr", {}, [
+        el("td", { text: "#" + p.id }),
+        el("td", {}, [el("div", { text: "biller #" + p.biller_id + (p.paid_to && names[p.paid_to] ? " · " + names[p.paid_to] : "") }), el("div", { class: "mono muted", text: "purpose " + p.purpose_hash.slice(0, 16) + "…" })]),
+        el("td", { class: "num", text: money(p.amount) }),
+        el("td", {}, [el("div", { text: p.approvals.length + " / " + c.threshold }), approvers]),
+        el("td", {}, [status]),
+        el("td", {}, [receipt]),
+      ]));
+    }
+
+    const ct = $("contribsTable").querySelector("tbody"); ct.textContent = "";
+    if (!s.contributions.length) ct.appendChild(el("tr", {}, [el("td", { colspan: "6", class: "muted", text: "No contributions yet." })]));
+    for (const x of s.contributions) {
+      ct.appendChild(el("tr", {}, [
+        el("td", { text: String(x.index + 1) }),
+        el("td", { text: iso(x.ledger_time) }),
+        el("td", {}, [el("div", { text: nameOf(x.from) }), el("div", { class: "mono muted", text: short(x.from) })]),
+        el("td", { class: "num", text: money(x.amount) }),
+        el("td", { class: "mono", text: x.memo_hash.slice(0, 16) + "…" }),
+        el("td", {}, [link(s.network, x.from)]),
+      ]));
+    }
+
+    const mt = $("committeeTable").querySelector("tbody"); mt.textContent = "";
+    for (const m of c.committee) {
+      mt.appendChild(el("tr", {}, [el("td", { text: nameOf(m) }), el("td", { class: "mono", text: m }), el("td", {}, [link(s.network, m)])]));
+    }
+    mt.appendChild(el("tr", {}, [el("td", { text: "organizer: " + nameOf(c.organizer) }), el("td", { class: "mono", text: c.organizer }), el("td", {}, [link(s.network, c.organizer)])]));
+
+    $("view").classList.remove("hidden");
+  }
+
+  // ---------------------------------------------------------- wiring
+  $("namesFile").addEventListener("change", async (ev) => {
+    const f = ev.target.files[0]; if (!f) return;
+    try { names = JSON.parse(await f.text()); setStatus("loaded " + Object.keys(names).length + " display names"); if (snapshot) render(snapshot); }
+    catch (e) { setStatus("names file: " + e.message, true); }
+  });
+  $("snapshotFile").addEventListener("change", async (ev) => {
+    const f = ev.target.files[0]; if (!f) return;
+    try { render(reviveSnapshot(JSON.parse(await f.text()))); setStatus("rendered from snapshot " + f.name + " (not live)"); }
+    catch (e) { setStatus("snapshot: " + e.message, true); }
+  });
+  async function go() {
+    try { const s = await loadFromChain(); render(s); setStatus("live: " + s.contributions.length + " contributions, " + s.payouts.length + " payouts"); }
+    catch (e) { setStatus(String(e.message || e), true); }
+  }
+  $("connect").addEventListener("submit", (ev) => { ev.preventDefault(); go(); });
+  $("refreshBtn").addEventListener("click", go);
+
+  // Prefill from the query string: ledger.html?contract=C...&campaign=0&rpc=...&network=testnet
+  const q = new URLSearchParams(location.search);
+  if (q.get("contract")) $("contractId").value = q.get("contract");
+  if (q.get("campaign")) $("campaignId").value = q.get("campaign");
+  if (q.get("rpc")) $("rpcUrl").value = q.get("rpc");
+  if (q.get("network")) $("network").value = q.get("network");
+  fetch("names.json").then((r) => (r.ok ? r.json() : null)).then((n) => { if (n) { names = n; if (snapshot) render(snapshot); } }).catch(() => {});
+  if (q.get("contract")) go();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+{
+  "note": "Payout destinations for the demo. name_hash = sha256(name + ' / ' + reference). Addresses are freshly generated keys with no funds; replace with the biller's real Stellar account or anchor deposit address before registering on a network.",
+  "billers": [
+    {
+      "id": 0,
+      "name": "Kenyatta National Hospital",
+      "reference": "KNH-2211",
+      "category": "hospital",
+      "address": "GB3G7XWVFRNYTROVSMMWYZSM2UXXTTJNR577PREWD3XRG6X3YMRJWW3Y",
+      "verified": true,
+      "active": true,
+      "cash_out": "anchor: USDC -> KES bank transfer to the hospital collection account"
+    },
+    {
+      "id": 1,
+      "name": "Moi Girls High School Eldoret",
+      "reference": "MGHS",
+      "category": "school",
+      "address": "GAMEAB73F7HSU6WBOTAQLQVWTAVJSLODBTTPUVBXGKJWTPJRHNXX3CFY",
+      "verified": true,
+      "active": true,
+      "cash_out": "anchor: USDC -> KES to the school fees account"
+    },
+    {
+      "id": 2,
+      "name": "Lee Funeral Home Nairobi",
+      "reference": "LFH",
+      "category": "funeral",
+      "address": "GBSOPZBDQCOMPY2HLNUEFZZI23JFIC7QLN636J3CZDMJSX3DKE3KHBOM",
+      "verified": true,
+      "active": true,
+      "cash_out": "MoneyGram cash pickup by the funeral home's accounts clerk"
+    },
+    {
+      "id": 3,
+      "name": "Goodlife Pharmacy Kenyatta Ave",
+      "reference": "GLP-14",
+      "category": "other",
+      "address": "GCGISFIXJBLBEOR72MTJXDIRLLMXF52NPXLHQ4L6AUWY376OG4PPRO7O",
+      "verified": true,
+      "active": true,
+      "cash_out": "anchor: USDC -> M-Pesa paybill"
+    },
+    {
+      "id": 4,
+      "name": "Mwangi Clinic & Chemist",
+      "reference": "pending KYC",
+      "category": "hospital",
+      "address": "GDD6VQ6V22ORVTQZD5DMRWVZ3G7CGKAE2KVEMZ2ITPBYS4PVQJFR3BR6",
+      "verified": false,
+      "active": true,
+      "cash_out": "not yet verified: no invoice header or bank letter received"
+    }
+  ]
+}

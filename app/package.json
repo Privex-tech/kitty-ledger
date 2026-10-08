@@ -1,0 +1,26 @@
+{
+  "name": "kitty-ledger-cli",
+  "version": "0.1.0",
+  "description": "CLI and public ledger page for Kitty Ledger community campaigns on Stellar",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "bin": {
+    "kitty": "./dist/src/cli.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "tsc -p tsconfig.json && node --test \"dist/test/**/*.test.js\"",
+    "kitty": "node dist/src/cli.js"
+  },
+  "dependencies": {
+    "@stellar/stellar-sdk": "^17.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0"
+  }
+}

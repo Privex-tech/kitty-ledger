@@ -1,0 +1,18 @@
+[package]
+name = "campaign"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "Community campaign funds with public contribution ledger, M-of-N committee approvals and biller-direct payouts"
+
+[lib]
+crate-type = ["cdylib"]
+doctest = false
+
+[dependencies]
+soroban-sdk = { workspace = true }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }
+biller_registry = { path = "../biller_registry" }

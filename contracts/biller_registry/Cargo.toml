@@ -1,0 +1,20 @@
+[package]
+name = "biller_registry"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "Admin-managed registry of verified payout destinations (hospitals, schools, funeral homes, utilities) for Kitty Ledger campaigns"
+
+[lib]
+# cdylib is the Soroban wasm artifact. rlib is added so the campaign crate's tests can
+# register this contract natively in the same Soroban host and exercise the real
+# cross-contract call instead of a mock.
+crate-type = ["cdylib", "rlib"]
+doctest = false
+
+[dependencies]
+soroban-sdk = { workspace = true }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }

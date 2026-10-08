@@ -1,0 +1,50 @@
+{
+  "title": "Mama Njeri surgery fund - Nakuru chapter",
+  "description": "Emergency fund for Mama Njeri's hip surgery at Kenyatta National Hospital. Deposit first, then post-op medication. Anything left goes to follow-up visits or is refunded.",
+  "token": "USDC (Stellar Asset Contract; set TOKEN_CONTRACT_ID)",
+  "goal": "3000.00",
+  "deadline": "2026-10-24",
+  "organizer_note": "Association secretary (Nakuru chapter) creates the campaign and closes it; the committee approves payouts.",
+  "committee": [
+    {
+      "role": "chair",
+      "address": "GB6T4DK2NK2MPN5USICJMTRE2XB6LBWREOZFJJIG3X3MZBMED4PWMKIA",
+      "name": "Rev. Margaret Wambui"
+    },
+    {
+      "role": "treasurer",
+      "address": "GDKXE7FVT22EDOXZ3V6BCPR7FR5CF6BI5SVAO6GM6LBCZUUNOU7DPQ36",
+      "name": "James Karanja"
+    },
+    {
+      "role": "secretary",
+      "address": "GBV5JS7ITD6T62QPZBM4IMTI7DA4FFJL3WOYDNUPDDBWQNPW4GXRFNT5",
+      "name": "Lucy Nyokabi"
+    },
+    {
+      "role": "member",
+      "address": "GBW5GCDW3TBXLN2JYRLPFWZ5SIWUZSTU7JEFYEBSO534FL2FYV5OYMYA",
+      "name": "Dr. Paul Gitau"
+    },
+    {
+      "role": "member",
+      "address": "GC5NJLRZOMV42F3EDM5A7FLH42WSKEKEM62VX7SAGST6PKGE55JDGOXH",
+      "name": "Ann Wanjiru"
+    }
+  ],
+  "threshold": 3,
+  "planned_payouts": [
+    {
+      "biller_id": 0,
+      "amount": "2750.00",
+      "purpose": "KNH admission deposit, invoice KNH-2211"
+    },
+    {
+      "biller_id": 3,
+      "amount": "561.82",
+      "purpose": "Goodlife Pharmacy post-op medication, receipt GLP-14-0093"
+    }
+  ],
+  "seed_total": "3311.82",
+  "contributors_csv": "data/seed/contributors.csv"
+}

@@ -1,0 +1,343 @@
+{
+  "network": "testnet",
+  "contractId": "CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC",
+  "campaignId": 0,
+  "fetchedAt": "2026-09-24T12:00:00.000Z",
+  "campaign": {
+    "organizer": "GBORGANIZER5YJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGD",
+    "token": "CBTOKEN3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSA",
+    "goal": "30000000000",
+    "raised": "33118200000",
+    "deadline": 1761264000,
+    "committee": [
+      "GB6T4DK2NK2MPN5USICJMTRE2XB6LBWREOZFJJIG3X3MZBMED4PWMKIA",
+      "GDKXE7FVT22EDOXZ3V6BCPR7FR5CF6BI5SVAO6GM6LBCZUUNOU7DPQ36",
+      "GBV5JS7ITD6T62QPZBM4IMTI7DA4FFJL3WOYDNUPDDBWQNPW4GXRFNT5",
+      "GBW5GCDW3TBXLN2JYRLPFWZ5SIWUZSTU7JEFYEBSO534FL2FYV5OYMYA",
+      "GC5NJLRZOMV42F3EDM5A7FLH42WSKEKEM62VX7SAGST6PKGE55JDGOXH"
+    ],
+    "threshold": 3,
+    "registry": "CBREGISTRYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSB",
+    "state": "Closed",
+    "title_hash": "7edc89eb39b995f1c6fe316e97bd40e16dd38af7a2fcff85cc61e861b26f0411",
+    "paid_out": "33118200000",
+    "refunded": "0",
+    "contribution_count": 40,
+    "payout_count": 2,
+    "created_at": 1758672000
+  },
+  "contributions": [
+    {
+      "index": 0,
+      "from": "GDX7ZQDO62OSSKGYBUYYNLXCMQZ4KUYJ5BOIV5HYZMZ6K2ZAV5O5KHLA",
+      "amount": "500000000",
+      "memo_hash": "812255ae60ef55114bc028e22c7e0d7abd24bf2157b1af625181206743e3d720",
+      "ledger_time": 1758672000
+    },
+    {
+      "index": 1,
+      "from": "GDPG2OUWWZLGU3ZM7XAQMY33GCSP2IKIRTAXUKSQUU2OIEWZ56ZLBB7D",
+      "amount": "253700000",
+      "memo_hash": "2d13bd32b3d155e2331b0fef30ca122b18d649827d0e46e742af0bf3d5cfddcf",
+      "ledger_time": 1758693600
+    },
+    {
+      "index": 2,
+      "from": "GADCLQLJBPGRBEO3LZ2C66XEDUDOAHH6T5B2QEC32HEKCWDR27DARHFD",
+      "amount": "1000000000",
+      "memo_hash": "141e0cb119f5abea2d44f888f8f4f9b64404294d9e83034af2910a4978cbb39f",
+      "ledger_time": 1758715200
+    },
+    {
+      "index": 3,
+      "from": "GBAH7R6IUEGZ7GOWBRXDQ76FXY5JMPTAFSGMUHQA5KBVYIE2NEE3NKXK",
+      "amount": "5000000000",
+      "memo_hash": "3a3c04983eeb7008c977e934eabc9009c714151a35745ebe273c1a8ddb0ceec1",
+      "ledger_time": 1758736800
+    },
+    {
+      "index": 4,
+      "from": "GBH4JGF5TLBZZSPVRQMRAAXETFVSII7BGL7TQCEBBBFQGVHDVC2CWNMC",
+      "amount": "50000000",
+      "memo_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledger_time": 1758758400
+    },
+    {
+      "index": 5,
+      "from": "GBGRBK7MINQUS4AC3HPR7WHT2HTSFX6HK46BHMEMEQ77JFJIUPM4T2BX",
+      "amount": "125000000",
+      "memo_hash": "81f00e66dcae7e05d3c37e05b68722918cbc8da606b074de6abdc1aba8ffa419",
+      "ledger_time": 1758780000
+    },
+    {
+      "index": 6,
+      "from": "GDWHHQL5H6ZRAXCGUVWH2QXBAWZEPA2RZJNDGCFO2LUWQV6KT6G4GZ53",
+      "amount": "752500000",
+      "memo_hash": "93d709c5cf0c70e0e2af5a97cab33fa36f542aa27e101fbdf0d23b1c19702862",
+      "ledger_time": 1758801600
+    },
+    {
+      "index": 7,
+      "from": "GCQVG6PCVGY5DHRUDKAGAR5DDQ76LAM6AZL2LCSQBXBYIA5T7VDK4NS7",
+      "amount": "200000000",
+      "memo_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledger_time": 1758823200
+    },
+    {
+      "index": 8,
+      "from": "GBTWASXVXJQIJ3PTVBPB7QDBA7MD2U5X7FNH7MLFNR67IXZY6SVTB5VR",
+      "amount": "333300000",
+      "memo_hash": "ce2868d51c3d90e533d510f993964ea465061372868ec5ed4c95fe0f70e57615",
+      "ledger_time": 1758844800
+    },
+    {
+      "index": 9,
+      "from": "GAFFMSOZCUOTVWP5HPMQAY3URCYRXLRV5LZOFUAZAUYPMOMKZTZTKU3L",
+      "amount": "2500000000",
+      "memo_hash": "2b8be866dc3f740d9a7bc33bd6ec82bea2132f30b14a9f87b4799aef03c816bd",
+      "ledger_time": 1758866400
+    },
+    {
+      "index": 10,
+      "from": "GB5VA5EUMV56YWQFLGZFJZU4ME2KQOGVDOQ4YDK4MQGLYS7WJPCKDGMY",
+      "amount": "471300000",
+      "memo_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledger_time": 1758888000
+    },
+    {
+      "index": 11,
+      "from": "GCFXCARGJVMSRBVMKGD3SJDVOUEZMTE7JBJWTQ2TGYWBILCXGYUGV6UF",
+      "amount": "150000000",
+      "memo_hash": "c7f3b8afccd4c5dafb54a46194c586e9cc0d21aa16627f089e27a1248d027235",
+      "ledger_time": 1758909600
+    },
+    {
+      "index": 12,
+      "from": "GDI67V57QQT4JJZJPINPRUXBKDFQZJNJOZW7ZSFFWNPDHNKQN5N6GU7Y",
+      "amount": "606000000",
+      "memo_hash": "5e85490ae8986c5220906f36887acb01dd06f8d911a0dfb4096faff6bdfb3507",
+      "ledger_time": 1758931200
+    },
+    {
+      "index": 13,
+      "from": "GAOACWHJ67PMXLW6C5BEDKDF7KOACOJO4HM5TGS3KKCQAU4CPCWFSTCJ",
+      "amount": "109900000",
+      "memo_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledger_time": 1758952800
+    },
+    {
+      "index": 14,
+      "from": "GABGW3P35YWE24NCNYS2PUPY5GSCN22K2F5PROO2NC4AUGVJDIAUVNMZ",
+      "amount": "2000000000",
+      "memo_hash": "c9d48997e0e4fc4b136d6967f349e5151b45932d42793409d574587109310641",
+      "ledger_time": 1758974400
+    },
+    {
+      "index": 15,
+      "from": "GAE2ZIKCWXHUJU3FDU7NDSDJWM5KFPKYRMQEVN425MM2FGYQRUNWKL2R",
+      "amount": "87500000",
+      "memo_hash": "0f8fb3705da68c4586922272f4c8189c8b1322e18aa3e6e9db9418c77c703d49",
+      "ledger_time": 1758996000
+    },
+    {
+      "index": 16,
+      "from": "GCXWZVTLSGQTYQGB3WGLD75JJMPRQZK47NMG5PMOMQBUSDMT7ZIELNDS",
+      "amount": "1200000000",
+      "memo_hash": "15d4ef980a32da60fa5a80c6516cfcc8b9d994b8640d2e78683e8307e98a0138",
+      "ledger_time": 1759017600
+    },
+    {
+      "index": 17,
+      "from": "GA2NBMGN56RNEAGVSKUQ4X77KMWLKFSVHFPLN6M5YI6ZX57O4NXAQSFS",
+      "amount": "450000000",
+      "memo_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledger_time": 1759039200
+    },
+    {
+      "index": 18,
+      "from": "GAIMM2UMHTL6CUDKNO4B547YQ6CNFTACL2VSIQGLMFZF3KLSW5YNWGOO",
+      "amount": "55500000",
+      "memo_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledger_time": 1759060800
+    },
+    {
+      "index": 19,
+      "from": "GDDMQFXHZUIVIZYXG6LR4GNKHKZEYKCX4YMWBOXX6ESZ7LRTOKZHHLZN",
+      "amount": "3000000000",
+      "memo_hash": "51b04b34902137efa7e676d6afd63bf876f55adbc211348b91851d000422e50e",
+      "ledger_time": 1759082400
+    },
+    {
+      "index": 20,
+      "from": "GBBPBNU56RGOSITUH44UOTCYF73IPR2U4LHHJPCRBWBW4PD4MSXKR5IS",
+      "amount": "199900000",
+      "memo_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledger_time": 1759104000
+    },
+    {
+      "index": 21,
+      "from": "GCYRNSWYI256II5HV4JCEVVQDL4ODCODD2Y5VOSG2SRVN3KGEAAPH6E7",
+      "amount": "666600000",
+      "memo_hash": "7b8d96ec935c819b518d3930f20aeff080182b4dcdc9b8eb9cd792b497d3cb1e",
+      "ledger_time": 1759125600
+    },
+    {
+      "index": 22,
+      "from": "GC2GCGAHSYLUQLXDOQIY3CHKVRACQHUUHKZK2GELREB7OX7XQOZLYXQO",
+      "amount": "300000000",
+      "memo_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledger_time": 1759147200
+    },
+    {
+      "index": 23,
+      "from": "GAZCJSIFM2KTBFDIR5KQNAR7OMWU6MFJGM2M66OUWDGYF2OWCTPE7BOP",
+      "amount": "222200000",
+      "memo_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledger_time": 1759168800
+    },
+    {
+      "index": 24,
+      "from": "GC23QCC5SPKWJORSVQRUVJVCCOPO27OM6FN3AWLDVWP6JJAACO4UKIGE",
+      "amount": "1500000000",
+      "memo_hash": "d7eec6a64547fb6e88f1ed78590bbaba080c92d8145f0bd1c20d71b042aecc95",
+      "ledger_time": 1759190400
+    },
+    {
+      "index": 25,
+      "from": "GDTYTUBJNAXMMWC2QPVMW5MF6Y7WNVXELVO2JD7SFZEAAM6HGQGC7U24",
+      "amount": "77700000",
+      "memo_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledger_time": 1759212000
+    },
+    {
+      "index": 26,
+      "from": "GBS45LYYMIJEDJYMTSF5TFW7OTBYQOBHFE2AKHSTKMX46GOI5JGR5PU7",
+      "amount": "888800000",
+      "memo_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledger_time": 1759233600
+    },
+    {
+      "index": 27,
+      "from": "GAWHVX2MG67NDV7HF4N7AAXZFY2UNOKOEA5HUIPJZNXWDO6W7TWJP4GC",
+      "amount": "400000000",
+      "memo_hash": "677e4e9893ec80aa5b4375f2a237a4e02b0d97576c704a1ef74848f18ca0c467",
+      "ledger_time": 1759255200
+    },
+    {
+      "index": 28,
+      "from": "GDPRXECX2ZY4Y3S7UWGID655HJCXUUFZSSUYUDF6NDIR5ICAN6VKCIF4",
+      "amount": "111100000",
+      "memo_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledger_time": 1759276800
+    },
+    {
+      "index": 29,
+      "from": "GDPLAUYSRLFUZZOXVGVYIN6IWYGUTDEQNQSMFYSBQKP6CAZL5YM7G4X7",
+      "amount": "4999900000",
+      "memo_hash": "3865162485e5992a3b35072236f19675360affd3e6e41b7d063f7ef8554d8afc",
+      "ledger_time": 1759298400
+    },
+    {
+      "index": 30,
+      "from": "GB2W5YWED4XBEZLPFS5YDMBNPYCVTXWGQED2622PCBEJO7K2Y3MDXENI",
+      "amount": "275000000",
+      "memo_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledger_time": 1759320000
+    },
+    {
+      "index": 31,
+      "from": "GBV3WAREOFXIU3QCPZHSOUSDDP6VSVPWYJOCEZN5YUL3Q5LPKZOX2SUL",
+      "amount": "550000000",
+      "memo_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledger_time": 1759341600
+    },
+    {
+      "index": 32,
+      "from": "GBQRTOMCO43UCAUCUXSVFWPXECJRJBDZXCCPU2KHPTSVWULBW2FTNEOJ",
+      "amount": "90900000",
+      "memo_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledger_time": 1759363200
+    },
+    {
+      "index": 33,
+      "from": "GAGCPWRWFV7CCPSKQN3B5GOERZZQZ7RVULQF2GFMJVTDG62TWGB7DKK6",
+      "amount": "1750000000",
+      "memo_hash": "6e439c6030d8cb61e56f20619e59e239427bca3e0998ed897424216ae2bf68be",
+      "ledger_time": 1759384800
+    },
+    {
+      "index": 34,
+      "from": "GBZWAY3F34Y2Y5APMKKCO3JY5ZI3K54ZG444BCZ7HTD7GM6QUNYQZY2X",
+      "amount": "131300000",
+      "memo_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledger_time": 1759406400
+    },
+    {
+      "index": 35,
+      "from": "GB6VXGOUBHDFOIVH6QDYTCYYJW4K3YLJH5PSPIV72DGVMLLR77HGE5CP",
+      "amount": "353500000",
+      "memo_hash": "668f4b227f9dd6a54670735a6c0f808ea2da67fdec193eea8ded0fb36f52fdf5",
+      "ledger_time": 1759428000
+    },
+    {
+      "index": 36,
+      "from": "GAJGUAX3HOW4U5WT5UOCVFFYEHEQKYG56DSCMA4U25LDSHD7C743KDXJ",
+      "amount": "900000000",
+      "memo_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledger_time": 1759449600
+    },
+    {
+      "index": 37,
+      "from": "GDZP24AM5U75Q6HN7QOSS65PG2SHCXCL5WVTRLN2AYGM3YW2BGIQG3KF",
+      "amount": "60600000",
+      "memo_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledger_time": 1759471200
+    },
+    {
+      "index": 38,
+      "from": "GBC7YV7NTHBQX2F6U7PTU3KD3MQJQQM2HAJPODLABRYC3AKXYRWEGCIF",
+      "amount": "614200000",
+      "memo_hash": "5951792224a1024a5327403af9083024cdb933c47c2a4c18c781c413b6edc805",
+      "ledger_time": 1759492800
+    },
+    {
+      "index": 39,
+      "from": "GBND52LO6X7HXGA6V7VTPG3CGHENI755F643L3TEIZ4ZGPLGCWJPPYPJ",
+      "amount": "181800000",
+      "memo_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ledger_time": 1759514400
+    }
+  ],
+  "payouts": [
+    {
+      "id": 0,
+      "biller_id": 0,
+      "amount": "27500000000",
+      "purpose_hash": "6380af09ef64829c912e715c74be54e9438f26157654e359ea667356e19a3e62",
+      "approvals": [
+        "GB6T4DK2NK2MPN5USICJMTRE2XB6LBWREOZFJJIG3X3MZBMED4PWMKIA",
+        "GDKXE7FVT22EDOXZ3V6BCPR7FR5CF6BI5SVAO6GM6LBCZUUNOU7DPQ36",
+        "GBW5GCDW3TBXLN2JYRLPFWZ5SIWUZSTU7JEFYEBSO534FL2FYV5OYMYA"
+      ],
+      "executed": true,
+      "proposer": "GB6T4DK2NK2MPN5USICJMTRE2XB6LBWREOZFJJIG3X3MZBMED4PWMKIA",
+      "paid_to": "GB3G7XWVFRNYTROVSMMWYZSM2UXXTTJNR577PREWD3XRG6X3YMRJWW3Y",
+      "executed_at": 1759708800
+    },
+    {
+      "id": 1,
+      "biller_id": 3,
+      "amount": "5618200000",
+      "purpose_hash": "850ce0a031afbd74e2fd0a043c8f9b62966709e8e2fedf8b55b42861982d62c7",
+      "approvals": [
+        "GBV5JS7ITD6T62QPZBM4IMTI7DA4FFJL3WOYDNUPDDBWQNPW4GXRFNT5",
+        "GC5NJLRZOMV42F3EDM5A7FLH42WSKEKEM62VX7SAGST6PKGE55JDGOXH",
+        "GDKXE7FVT22EDOXZ3V6BCPR7FR5CF6BI5SVAO6GM6LBCZUUNOU7DPQ36"
+      ],
+      "executed": true,
+      "proposer": "GBV5JS7ITD6T62QPZBM4IMTI7DA4FFJL3WOYDNUPDDBWQNPW4GXRFNT5",
+      "paid_to": "GCGISFIXJBLBEOR72MTJXDIRLLMXF52NPXLHQ4L6AUWY376OG4PPRO7O",
+      "executed_at": 1760400000
+    }
+  ]
+}
