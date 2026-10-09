@@ -30,7 +30,7 @@ fraud is the most common cybercrime in Kenya (Sh29.9B lost in 2025). See
 
 ## What the MVP does
 
-Two Soroban contracts, a CLI and a public ledger page:
+Two strictly Soroban-based smart contracts, a CLI and a public ledger page:
 
 | Piece | What it does |
 |---|---|
@@ -112,6 +112,8 @@ ARCHITECTURE.md VALIDATION.md DEMO.md .env.example
 ```
 
 ## Status
+
+![Validation](https://img.shields.io/badge/validation-passed-success)
 
 **functional locally** (contracts, CLI and ledger page run and are tested against the
 Soroban host and offline fixtures); **testnet-ready** scripts provided, not executed.
