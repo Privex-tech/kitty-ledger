@@ -65,7 +65,7 @@ pub enum Error {
 pub enum State {
     /// Accepting contributions, goal not yet reached.
     Open,
-    /// Goal reached; committee may propose and approve payouts. Contributions are still
+    /// Goal reached (equal to or greater than the target); committee may propose and approve payouts. Contributions are still
     /// accepted until the deadline.
     Funded,
     /// Contributors may claim their exact contribution back.
@@ -86,7 +86,7 @@ pub struct Campaign {
     pub threshold: u32,
     pub registry: Address,
     pub state: State,
-    /// sha256 of the campaign description kept off-chain (WhatsApp post, PDF).
+    /// SHA-256 hash of the campaign description kept off-chain (WhatsApp post, PDF).
     pub title_hash: BytesN<32>,
     /// Sum of executed payouts.
     pub paid_out: i128,
@@ -323,6 +323,7 @@ fn available(c: &Campaign) -> i128 {
     c.raised - c.paid_out - c.refunded
 }
 
+/// Helper to construct a token client from the campaign's token address.
 fn token_client(env: &Env, c: &Campaign) -> token::TokenClient<'static> {
     token::TokenClient::new(env, &c.token)
 }
