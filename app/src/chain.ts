@@ -77,7 +77,10 @@ export function buildTransaction(
     .build();
 }
 
-/** Decode the single invoke-host-function operation of a transaction (used by tests and `--dry-run`). */
+/** 
+ * Decode the single invoke-host-function operation of a transaction (used by tests and `--dry-run`).
+ * Throws an error if the transaction does not contain exactly one invocation.
+ */
 export function decodeInvocation(tx: Transaction): Invocation {
   const op = tx.operations[0] as Operation.InvokeHostFunction | undefined;
   if (!op || op.type !== "invokeHostFunction") throw new Error("not an invoke host function op");
