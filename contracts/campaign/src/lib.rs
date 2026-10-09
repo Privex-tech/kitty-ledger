@@ -319,6 +319,7 @@ fn is_member(c: &Campaign, who: &Address) -> bool {
     c.committee.contains(who)
 }
 
+/// Helper to calculate available funds: raised - paid_out - refunded
 fn available(c: &Campaign) -> i128 {
     c.raised - c.paid_out - c.refunded
 }
