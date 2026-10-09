@@ -107,7 +107,10 @@ export function approvePayout(
   return { ok: true, value: { payout: { ...payout, approvals, executed: executes }, executes } };
 }
 
-/** How many more approvals a pending payout needs. */
+/** 
+ * How many more approvals a pending payout needs. 
+ * Returns 0 if already executed.
+ */
 export function approvalsRemaining(rules: Pick<CommitteeRules, "threshold">, payout: PayoutDraft): number {
   return payout.executed ? 0 : Math.max(0, rules.threshold - payout.approvals.length);
 }
