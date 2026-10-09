@@ -63,6 +63,10 @@ export function splitCsvLine(line: string): string[] {
   return out;
 }
 
+/**
+ * Parses a CSV string containing contributor data and returns the successfully
+ * parsed rows, rejected rows, and the total amount in stroops.
+ */
 export function parseContributorsCsv(text: string): CsvIngestion {
   const lines = text.replace(/^﻿/, "").split(/\r?\n/);
   const rows: ContributorRow[] = [];

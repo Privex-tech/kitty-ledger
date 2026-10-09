@@ -21,7 +21,7 @@
               "function_name": "register_biller",
               "args": [
                 {
-                  "bytes": "226ab6b3879b64d65c37740d228f0b3cb840b2fc6afd0d6c764f671e07cb310c"
+                  "bytes": "3b2dbb0c3b255fc514a96f2066457e5d3f19041b04a6e345244716d77a8510cd"
                 },
                 {
                   "symbol": "hospital"
@@ -147,7 +147,7 @@
                       "symbol": "name_hash"
                     },
                     "val": {
-                      "bytes": "226ab6b3879b64d65c37740d228f0b3cb840b2fc6afd0d6c764f671e07cb310c"
+                      "bytes": "3b2dbb0c3b255fc514a96f2066457e5d3f19041b04a6e345244716d77a8510cd"
                     }
                   },
                   {
@@ -320,7 +320,7 @@
                     "symbol": "name_hash"
                   },
                   "val": {
-                    "bytes": "226ab6b3879b64d65c37740d228f0b3cb840b2fc6afd0d6c764f671e07cb310c"
+                    "bytes": "3b2dbb0c3b255fc514a96f2066457e5d3f19041b04a6e345244716d77a8510cd"
                   }
                 }
               ]

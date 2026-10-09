@@ -17,7 +17,7 @@
               "function_name": "register_biller",
               "args": [
                 {
-                  "bytes": "48e0e69a8a67acb859c91449e08e9c242e99118b11840e7f32898305f7171a93"
+                  "bytes": "de383001a4df6c36d285c22b49c0133277adffcc385945ce24b0cafe607584de"
                 },
                 {
                   "symbol": "funeral"
@@ -126,7 +126,7 @@
                       "symbol": "name_hash"
                     },
                     "val": {
-                      "bytes": "48e0e69a8a67acb859c91449e08e9c242e99118b11840e7f32898305f7171a93"
+                      "bytes": "de383001a4df6c36d285c22b49c0133277adffcc385945ce24b0cafe607584de"
                     }
                   },
                   {

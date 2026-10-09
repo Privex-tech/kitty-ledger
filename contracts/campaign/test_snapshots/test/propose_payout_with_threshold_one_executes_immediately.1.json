@@ -380,7 +380,7 @@
                   "i128": "400000000"
                 },
                 {
-                  "bytes": "4fb0453a4c040724c6ccb0f5c37ce07a4faed5b6214652d570c4b6a651f20887"
+                  "bytes": "9b45583529fc2c72162aa9318474846d65a2280b327645ad8488b1a1bb7972f6"
                 }
               ]
             }
@@ -1417,7 +1417,7 @@
                       "symbol": "purpose_hash"
                     },
                     "val": {
-                      "bytes": "4fb0453a4c040724c6ccb0f5c37ce07a4faed5b6214652d570c4b6a651f20887"
+                      "bytes": "9b45583529fc2c72162aa9318474846d65a2280b327645ad8488b1a1bb7972f6"
                     }
                   }
                 ]

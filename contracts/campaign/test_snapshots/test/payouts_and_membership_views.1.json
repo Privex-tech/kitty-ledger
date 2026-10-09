@@ -386,7 +386,7 @@
                   "i128": "1000000"
                 },
                 {
-                  "bytes": "192da362885df6efd029c942c90a5e13a1cfb5a63e4b66a963ba766608da2c23"
+                  "bytes": "160a39be898a4e3bbbdfc9757ff48dbcda3e3298a8b0a6d994e1f84b7465e9e4"
                 }
               ]
             }
@@ -417,7 +417,7 @@
                   "i128": "2000000"
                 },
                 {
-                  "bytes": "192da362885df6efd029c942c90a5e13a1cfb5a63e4b66a963ba766608da2c23"
+                  "bytes": "160a39be898a4e3bbbdfc9757ff48dbcda3e3298a8b0a6d994e1f84b7465e9e4"
                 }
               ]
             }
@@ -1460,7 +1460,7 @@
                       "symbol": "purpose_hash"
                     },
                     "val": {
-                      "bytes": "192da362885df6efd029c942c90a5e13a1cfb5a63e4b66a963ba766608da2c23"
+                      "bytes": "160a39be898a4e3bbbdfc9757ff48dbcda3e3298a8b0a6d994e1f84b7465e9e4"
                     }
                   }
                 ]
@@ -1565,7 +1565,7 @@
                       "symbol": "purpose_hash"
                     },
                     "val": {
-                      "bytes": "192da362885df6efd029c942c90a5e13a1cfb5a63e4b66a963ba766608da2c23"
+                      "bytes": "160a39be898a4e3bbbdfc9757ff48dbcda3e3298a8b0a6d994e1f84b7465e9e4"
                     }
                   }
                 ]

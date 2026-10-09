@@ -17,7 +17,7 @@
               "function_name": "register_biller",
               "args": [
                 {
-                  "bytes": "f0474f505da31fab535974a9f386c1c775a9d692ee9b5e877dea5df9bbfc2093"
+                  "bytes": "4c29197a2667f27b72738a680e6d4c72369df4b5065d7d45e48330ec12f81111"
                 },
                 {
                   "symbol": "utility"
@@ -168,7 +168,7 @@
                       "symbol": "name_hash"
                     },
                     "val": {
-                      "bytes": "f0474f505da31fab535974a9f386c1c775a9d692ee9b5e877dea5df9bbfc2093"
+                      "bytes": "41baa81946e1b9598a7f27042d7d2de460c4c43f388d10ff8b7dac0778e03178"
                     }
                   },
                   {

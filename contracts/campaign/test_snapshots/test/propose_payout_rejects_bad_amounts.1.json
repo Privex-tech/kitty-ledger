@@ -388,7 +388,7 @@
                   "i128": "1000000000"
                 },
                 {
-                  "bytes": "8432a7c6a53d3138b4a36bf3b17af1f8358e66dd8d7f511a0c6dc58d003ca298"
+                  "bytes": "a95b1ef43ae9892de2f210a25cbee5b0a2acc2293fb22114c55ed4e61d26aff4"
                 }
               ]
             }
@@ -1426,7 +1426,7 @@
                       "symbol": "purpose_hash"
                     },
                     "val": {
-                      "bytes": "8432a7c6a53d3138b4a36bf3b17af1f8358e66dd8d7f511a0c6dc58d003ca298"
+                      "bytes": "03e3faecc3b0e2c58048d6ced64cc16f5c3da2f6982b42089508b61a70eb6e2a"
                     }
                   }
                 ]
@@ -1820,7 +1820,7 @@
                     "symbol": "purpose_hash"
                   },
                   "val": {
-                    "bytes": "8432a7c6a53d3138b4a36bf3b17af1f8358e66dd8d7f511a0c6dc58d003ca298"
+                    "bytes": "a95b1ef43ae9892de2f210a25cbee5b0a2acc2293fb22114c55ed4e61d26aff4"
                   }
                 }
               ]

@@ -336,7 +336,7 @@
                   "i128": "5000000"
                 },
                 {
-                  "bytes": "648a20edb5e9d62d0b01efccbddfe48c040f424ebde43598201777ee8d38d604"
+                  "bytes": "94643c263b549deaa6ff5a21ac63872b47469a85f0040eb904b32dd59dfdacb1"
                 }
               ]
             }
@@ -1292,7 +1292,7 @@
                       "symbol": "memo_hash"
                     },
                     "val": {
-                      "bytes": "648a20edb5e9d62d0b01efccbddfe48c040f424ebde43598201777ee8d38d604"
+                      "bytes": "a0c14462cf1d431500d221cfeee2cdfebf9c09f77d9b5fad014f8a9880a47c10"
                     }
                   }
                 ]
