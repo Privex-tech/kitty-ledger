@@ -44,6 +44,9 @@ interface Env {
   namesFile: string;
 }
 
+/**
+ * Reads configuration from environment variables, providing testnet defaults.
+ */
 function readEnv(): Env {
   const e = process.env;
   return {
