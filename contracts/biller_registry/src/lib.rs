@@ -134,6 +134,7 @@ pub struct AddressCancelled {
 #[contract]
 pub struct BillerRegistry;
 
+/// Checks if the category is one of the predefined accepted symbols.
 fn is_known_category(category: &Symbol) -> bool {
     *category == symbol_short!("hospital")
         || *category == symbol_short!("school")
