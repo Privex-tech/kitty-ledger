@@ -7,6 +7,7 @@ export function sha256(text: string): Buffer {
   return createHash(HASH_ALGO).update(text, "utf8").digest();
 }
 
+/** sha256 of a UTF-8 string, as a hex string. */
 export function sha256Hex(text: string): string {
   return sha256(text).toString("hex");
 }
