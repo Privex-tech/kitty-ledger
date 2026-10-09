@@ -137,6 +137,7 @@ export function parseDeadline(input: string, now: number = Math.floor(Date.now()
   return ts;
 }
 
+/** Parses a comma- or space-separated list of committee member addresses. */
 export function parseCommittee(input: string): string[] {
   const members = input
     .split(/[,\s]+/)
