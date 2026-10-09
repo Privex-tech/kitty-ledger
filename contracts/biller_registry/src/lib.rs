@@ -29,6 +29,7 @@ pub enum Error {
     AlreadyInitialized = 1,
     NotInitialized = 2,
     InvalidCategory = 3,
+    /// Biller with the given ID does not exist in the registry.
     BillerNotFound = 4,
     NoPendingChange = 5,
     DelayNotElapsed = 6,
@@ -157,6 +158,7 @@ fn require_admin(env: &Env) -> Result<Address, Error> {
     Ok(a)
 }
 
+/// Loads a biller from storage and bumps its TTL to keep it active.
 fn load_biller(env: &Env, id: u32) -> Result<Biller, Error> {
     let key = DataKey::Biller(id);
     let b = env
