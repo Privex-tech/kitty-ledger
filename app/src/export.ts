@@ -105,6 +105,9 @@ export interface ExportSummary {
   reconciles: boolean;
 }
 
+/**
+ * Summarises a snapshot into a set of key metrics and a reconciliation flag.
+ */
 export function summarise(s: LedgerSnapshot): ExportSummary {
   const c = s.campaign;
   const available = c.raised - c.paid_out - c.refunded;
