@@ -88,6 +88,7 @@ export function withThousands(formatted: string): string {
   return frac === undefined ? `${sign}${grouped}` : `${sign}${grouped}.${frac}`;
 }
 
+/** Sums an iterable of stroops values into a total. */
 export function sumStroops(values: Iterable<bigint>): bigint {
   let total = 0n;
   for (const v of values) total += v;
