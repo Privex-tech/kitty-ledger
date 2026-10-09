@@ -7,6 +7,9 @@
 export const DECIMALS = 7;
 export const UNIT = 10n ** BigInt(DECIMALS);
 
+/**
+ * Thrown when the parsed amount fails basic constraints like being empty or negative.
+ */
 export class AmountError extends Error {
   constructor(
     public readonly input: string,
