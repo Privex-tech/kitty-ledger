@@ -116,5 +116,8 @@ ARCHITECTURE.md VALIDATION.md DEMO.md .env.example
 ![Validation](https://img.shields.io/badge/validation-passed-success)
 
 **functional locally** (contracts, CLI and ledger page run and are tested against the
-Soroban host and offline fixtures); **testnet-ready** scripts provided, not executed.
-No deployment, no users, no measured metric yet.
+Soroban host and offline fixtures); the contracts are deployed to Testnet at:
+- Biller Registry: [CC57XSCKHKYZ74GJRFZNEV7HS3RA7EPWZF7XEKMB2RTNM6PZ42I3YORC](https://stellar.expert/explorer/testnet/contract/CC57XSCKHKYZ74GJRFZNEV7HS3RA7EPWZF7XEKMB2RTNM6PZ42I3YORC)
+- Campaign: [CBKUPDXDFODFLJBN2CX56GJLTSY6UFEPP3YLUURPTXQW5TIVPE6BQECH](https://stellar.expert/explorer/testnet/contract/CBKUPDXDFODFLJBN2CX56GJLTSY6UFEPP3YLUURPTXQW5TIVPE6BQECH)
+
+No users, no measured metric yet.
