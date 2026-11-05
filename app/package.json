@@ -17,7 +17,7 @@
     "kitty": "node dist/src/cli.js"
   },
   "dependencies": {
-    "@stellar/stellar-sdk": "^17.1.0"
+    "@stellar/stellar-sdk": "^17.4.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
