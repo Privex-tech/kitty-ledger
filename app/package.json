@@ -20,7 +20,7 @@
     "@stellar/stellar-sdk": "^17.1.0"
   },
   "devDependencies": {
-    "@types/node": "^22.10.0",
+    "@types/node": "^26.6.6",
     "typescript": "^5.7.0"
   }
 }
