@@ -1,5 +1,7 @@
 # Kitty Ledger
 
+[![ci](https://github.com/Privex-tech/kitty-ledger/actions/workflows/ci.yml/badge.svg)](https://github.com/Privex-tech/kitty-ledger/actions/workflows/ci.yml)
+
 Community and diaspora campaign funds on Stellar where every contribution is public,
 every payout needs M-of-N committee approval, and money goes straight to a registered
 biller (hospital, school, funeral home) instead of through one person's phone.
