@@ -113,12 +113,13 @@ ARCHITECTURE.md VALIDATION.md DEMO.md CONTRIBUTING.md SECURITY.md LICENSE .env.e
 
 ## Status
 
-![Validation](https://img.shields.io/badge/validation-passed-success)
+![Testnet](https://img.shields.io/badge/testnet-end--to--end_run_recorded-blue) ![Pilot](https://img.shields.io/badge/user_pilot-not_started-lightgrey)
 
-**functional locally** (contracts, CLI and ledger page run and are tested against the
-Soroban host and offline fixtures); the contracts have been deployed to Testnet by the maintainers (the addresses below; the deployment
-script was not run in the offline build environment described in `VALIDATION.md`):
-- Biller Registry: [CC57XSCKHKYZ74GJRFZNEV7HS3RA7EPWZF7XEKMB2RTNM6PZ42I3YORC](https://stellar.expert/explorer/testnet/contract/CC57XSCKHKYZ74GJRFZNEV7HS3RA7EPWZF7XEKMB2RTNM6PZ42I3YORC)
-- Campaign: [CBKUPDXDFODFLJBN2CX56GJLTSY6UFEPP3YLUURPTXQW5TIVPE6BQECH](https://stellar.expert/explorer/testnet/contract/CBKUPDXDFODFLJBN2CX56GJLTSY6UFEPP3YLUURPTXQW5TIVPE6BQECH)
+**functional**: contracts, CLI and ledger page are tested against the Soroban host and offline
+fixtures, and a full campaign (contribute, 2-of-3 payout with receipt, missed-goal refund) was run
+on Stellar testnet on 2026-11-05 with the transaction hashes recorded in `VALIDATION.md`.
+Testnet deployment:
+- Biller Registry: [CAFBA3ZK272HVXXLSUNTAIN2TJOT37LQJBXW5TDAZYZFNNI4QUALIKQC](https://stellar.expert/explorer/testnet/contract/CAFBA3ZK272HVXXLSUNTAIN2TJOT37LQJBXW5TDAZYZFNNI4QUALIKQC)
+- Campaign: [CDZXXSO76KUOUG4ORYU77EYX47MGSLIHVQTD7ATESI5V7D45ORFQOY4H](https://stellar.expert/explorer/testnet/contract/CDZXXSO76KUOUG4ORYU77EYX47MGSLIHVQTD7ATESI5V7D45ORFQOY4H)
 
 No users, no measured metric yet.

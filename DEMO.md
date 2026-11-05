@@ -190,7 +190,7 @@ node dist/src/cli.js biller-cancel-address  --biller 0
 node dist/src/cli.js biller-status  --biller 0            # record, is_payable, pending address
 ```
 
-## 7. Testnet (written, not executed here)
+## 7. Testnet (executed 2026-11-05, results in VALIDATION.md)
 
 ```bash
 scripts/build.sh                 # tests + wasm + app
@@ -206,5 +206,5 @@ node dist/src/cli.js export     --campaign 0 --format json --out ledger.json
 
 Expected: each command prints `method: SUCCESS (<tx hash>)` and a stellar.expert link;
 the third `approve` moves the funds to the hospital's registered address and `status`
-shows `1 executed / 1 proposed`. This path depends on network access that the build
-environment did not have, so it is documented, not demonstrated.
+shows `1 executed / 1 proposed`. The same CLI commands were run against testnet and the transaction hashes are in
+`VALIDATION.md`. `scripts/deploy-testnet.sh` itself has not been run (it targets stellar-cli 28).

@@ -1,0 +1,98 @@
+{
+  "format": "kitty-ledger-export",
+  "version": 1,
+  "network": "testnet",
+  "contract_id": "CDZXXSO76KUOUG4ORYU77EYX47MGSLIHVQTD7ATESI5V7D45ORFQOY4H",
+  "campaign_id": 0,
+  "fetched_at": "2026-11-05T01:37:45.898Z",
+  "verify_url": "https://stellar.expert/explorer/testnet/contract/CDZXXSO76KUOUG4ORYU77EYX47MGSLIHVQTD7ATESI5V7D45ORFQOY4H",
+  "summary": {
+    "goal": "3000.00",
+    "raised": "3100.50",
+    "paid_out": "2750.00",
+    "refunded": "0.00",
+    "available": "350.50",
+    "percent_of_goal": 103.35,
+    "contributors": 2,
+    "contributions": 2,
+    "payouts_proposed": 1,
+    "payouts_executed": 1,
+    "receipts_total": "2750.00",
+    "reconciles": true
+  },
+  "campaign": {
+    "state": "Funded",
+    "organizer": "GBU4GIQLZBAMBIGQMWHHL7PBORRXIPRMZUDQCPGJAMAIVBLUGUY2B4GX",
+    "token": "CDVX3BP3ZPFY4AH5SMDGNURGYKOC3FLZSHFLVJPZ462QGRD3D5ZJARZK",
+    "registry": "CAFBA3ZK272HVXXLSUNTAIN2TJOT37LQJBXW5TDAZYZFNNI4QUALIKQC",
+    "goal": "3000.00",
+    "raised": "3100.50",
+    "paid_out": "2750.00",
+    "refunded": "0.00",
+    "deadline": "2026-12-05T01:33:19.000Z",
+    "created_at": "2026-11-05T01:33:35.000Z",
+    "committee": [
+      {
+        "address": "GC3XPWWDP2YULPWIFES6E44DQAY4BJOQNXGMWFDC3R57HZYOPROCJVU5",
+        "name": "GC3X…JVU5"
+      },
+      {
+        "address": "GCZTR2ADRIORF72UXH4VUZZ4NYBAS44QZSAWL2TEASYT7IX54XZSCW35",
+        "name": "GCZT…CW35"
+      },
+      {
+        "address": "GDSMAVSNXSNQXUYNXT6IRINREQVYS2GFSFJEOT4PABD7ZCD2ZBONODIY",
+        "name": "GDSM…ODIY"
+      }
+    ],
+    "threshold": 2,
+    "title_hash": "126,220,137,235,57,185,149,241,198,254,49,110,151,189,64,225,109,211,138,247,162,252,255,133,204,97,232,97,178,111,4,17"
+  },
+  "contributions": [
+    {
+      "index": 0,
+      "time": "2026-11-05T01:35:50.000Z",
+      "from": "GAM74QUGWSKPIAVUNR5AZKK2XUUCN4NX7R2YS4BECPEI2FIK2EL4FFYL",
+      "name": "GAM7…FFYL",
+      "amount": "2000.00",
+      "memo_hash": "155,237,162,190,157,165,40,183,59,188,62,163,60,141,220,204,233,162,10,253,118,112,208,139,166,166,16,170,209,194,88,54",
+      "verify_url": "https://stellar.expert/explorer/testnet/account/GAM74QUGWSKPIAVUNR5AZKK2XUUCN4NX7R2YS4BECPEI2FIK2EL4FFYL"
+    },
+    {
+      "index": 1,
+      "time": "2026-11-05T01:36:15.000Z",
+      "from": "GBEU473L3PIZGXJB2X3JEXPFTQKBLUTHLTE6BXYGPQOGVNMDOSGT2QAX",
+      "name": "GBEU…2QAX",
+      "amount": "1100.50",
+      "memo_hash": "178,33,232,161,63,173,176,173,5,74,31,254,143,135,47,243,58,90,171,140,83,158,192,3,91,155,80,211,20,45,255,18",
+      "verify_url": "https://stellar.expert/explorer/testnet/account/GBEU473L3PIZGXJB2X3JEXPFTQKBLUTHLTE6BXYGPQOGVNMDOSGT2QAX"
+    }
+  ],
+  "payouts": [
+    {
+      "id": 0,
+      "biller_id": 0,
+      "amount": "2750.00",
+      "purpose_hash": "66,150,96,138,150,179,3,115,125,131,56,57,151,190,219,204,181,62,31,74,250,193,85,190,108,243,25,214,85,120,168,132",
+      "proposer": "GC3XPWWDP2YULPWIFES6E44DQAY4BJOQNXGMWFDC3R57HZYOPROCJVU5",
+      "approvals": [
+        {
+          "address": "GC3XPWWDP2YULPWIFES6E44DQAY4BJOQNXGMWFDC3R57HZYOPROCJVU5",
+          "name": "GC3X…JVU5"
+        },
+        {
+          "address": "GCZTR2ADRIORF72UXH4VUZZ4NYBAS44QZSAWL2TEASYT7IX54XZSCW35",
+          "name": "GCZT…CW35"
+        }
+      ],
+      "approvals_count": 2,
+      "threshold": 2,
+      "executed": true,
+      "receipt": {
+        "paid_to": "GDP2PQALFSM64UKICWF336KWHV5KTZHTTENQRBOCXVSQEWGSVR4LMQBP",
+        "executed_at": "2026-11-05T01:36:45.000Z",
+        "verify_url": "https://stellar.expert/explorer/testnet/account/GDP2PQALFSM64UKICWF336KWHV5KTZHTTENQRBOCXVSQEWGSVR4LMQBP"
+      }
+    }
+  ]
+}

@@ -36,14 +36,14 @@ mutual-aid fundraising with transparent disbursement) and the final selection (s
 
 ## Observed facts (this build)
 
-- Both contracts compile to wasm (`biller_registry.wasm` 10,194 bytes, `campaign.wasm`
-  22,935 bytes) and pass 63 tests executed inside the Soroban host: 19 registry, 44
+- Both contracts compile to wasm (`biller_registry.wasm` 11,273 bytes, `campaign.wasm`
+  25,490 bytes with the current toolchain) and pass 63 tests executed inside the Soroban host: 19 registry, 44
   campaign, including the two scenario tests and negative tests for every auth, state,
   deadline and threshold rule.
 - The CLI and its 35 offline tests run without network access; the messy seed CSV yields
   exactly 40 valid contributors totalling $3,311.82 and rejects 2 rows with reasons.
-- Testnet deployment was **not** attempted: soroban-testnet.stellar.org, Horizon and
-  Friendbot were unreachable from the build environment (see `CONTRIBUTING.md`).
+- Testnet deployment and a full campaign were executed on 2026-11-05 (UTC); see "Testnet
+  end-to-end run" below. An earlier offline build environment could not reach testnet.
 - No organiser, contributor, committee member or biller has seen or used the software.
 
 ## Team assumptions
@@ -80,7 +80,50 @@ mutual-aid fundraising with transparent disbursement) and the final selection (s
 
 ## Actual validation
 
-None yet. No deployment, no pilot, no interview, no measured baseline.
+Technical validation: done on testnet, see below. User validation: none yet. No pilot, no
+interview, no measured baseline; the team is the only user so far.
+
+## Testnet end-to-end run (executed 2026-11-05 UTC)
+
+The team ran both contracts on Stellar testnet through the `kitty` CLI, using throwaway keys
+(`stellar keys generate --fund`), a wrapped test asset `KUSD` (7 decimals) and wasm built with
+`stellar contract build`. Every row is a transaction anyone can open on stellar.expert.
+
+| Item | Value |
+|---|---|
+| Biller registry | [`CAFBA3ZK272HVXXLSUNTAIN2TJOT37LQJBXW5TDAZYZFNNI4QUALIKQC`](https://stellar.expert/explorer/testnet/contract/CAFBA3ZK272HVXXLSUNTAIN2TJOT37LQJBXW5TDAZYZFNNI4QUALIKQC) |
+| Campaign contract | [`CDZXXSO76KUOUG4ORYU77EYX47MGSLIHVQTD7ATESI5V7D45ORFQOY4H`](https://stellar.expert/explorer/testnet/contract/CDZXXSO76KUOUG4ORYU77EYX47MGSLIHVQTD7ATESI5V7D45ORFQOY4H) |
+| KUSD token (SAC) | [`CDVX3BP3ZPFY4AH5SMDGNURGYKOC3FLZSHFLVJPZ462QGRD3D5ZJARZK`](https://stellar.expert/explorer/testnet/contract/CDVX3BP3ZPFY4AH5SMDGNURGYKOC3FLZSHFLVJPZ462QGRD3D5ZJARZK) |
+| wasm sizes | `biller_registry.wasm` 11,273 bytes, `campaign.wasm` 25,490 bytes |
+
+**Campaign 0: goal met, committee payout.** Goal 3,000.00, 2-of-3 committee.
+
+| Step | CLI command | Result |
+|---|---|---|
+| Register biller "Kenyatta National Hospital" | `biller-register` | [`d3781a92…`](https://stellar.expert/explorer/testnet/tx/d3781a9242aaa9de81fee189aa48de70b8ec7a41aa8f3575960809103fa9d659), id 0 |
+| Verify biller | `biller-verify` | [`484d72d9…`](https://stellar.expert/explorer/testnet/tx/484d72d9cb9c7c438755efd2560679d5d6adee00dab342628c00335897f9c214); `biller-status` shows `payable: true` |
+| Create campaign | `create` | [`7debca20…`](https://stellar.expert/explorer/testnet/tx/7debca20245344f38b45221463907741fcd580dfb5824e4f953a27c9611eb689) |
+| Contribute 2,000.00 and 1,100.50 | `contribute` (two keys) | [`29c816a2…`](https://stellar.expert/explorer/testnet/tx/29c816a2dd12c4f684caf590d51a73b7fa4e85d8e47704ba9a30c66549c4ab31), [`752e6677…`](https://stellar.expert/explorer/testnet/tx/752e6677d41a0ad8cdbd5c7aedf8a9ee608bb9f9206573bd1f9497a654a70670); raised 3,100.50, state `Funded` |
+| Propose 2,750.00 payout | `propose` | [`34a416d2…`](https://stellar.expert/explorer/testnet/tx/34a416d238785f5860f68e5a3fb502d92661f2f90466b18367e6fa328bf44011) (1 of 2 approvals) |
+| Second approval | `approve` | [`6c423ed1…`](https://stellar.expert/explorer/testnet/tx/6c423ed1bcde9d016997470766ce6252f7ae9ef91bce52b5afeace6f571d9b39); payout executed, receipt published |
+
+Observed afterwards: biller token balance exactly 2,750.00; `status` reports paid out 2,750.00,
+held 350.50, `reconciles yes`. Ledger export: `data/validation/testnet-campaign-0.json`.
+
+**Campaign 1: goal missed, exact refund.** Goal 1,000.00, 100.00 contributed, deadline 150 s out.
+
+| Step | Result |
+|---|---|
+| Create, contribute 100.00 | [`ee392ef0…`](https://stellar.expert/explorer/testnet/tx/ee392ef0650a4e6c2f2c03461bbb135e702bb337d26befc147a919c05b08dc19), [`f719da5b…`](https://stellar.expert/explorer/testnet/tx/f719da5b1d9be2a00e47672862740aec6ebdf5bef4d5028b34a00e84d808fed3) |
+| `refund` after the deadline, signed by a committee member who is not the organiser | [`9a596742…`](https://stellar.expert/explorer/testnet/tx/9a596742b479c74243ca8b1ad229bb28b02fdd7e3b868e6ecaff590a88469a3b); state `Refunding` |
+| `refund --claim` for the contributor | [`20be326f…`](https://stellar.expert/explorer/testnet/tx/20be326fa117a41d6e98c123a8e7c456f452b6ea0e83f47c9255d48a06621075); contributor balance rose by exactly 100.00 (2,299.50 to 2,399.50) |
+| `close` by the organiser at zero balance | [`effabbb7…`](https://stellar.expert/explorer/testnet/tx/effabbb7c48061190bf079a3c3033f8b57eb1a0544fe9208e7bb6318682b1102) |
+
+Not exercised on testnet: the 24 h address-change delay (covered by the contract tests only).
+A first attempt at the contributions failed with a token error because the test wallets were
+under-funded (500 minted, 2,000 requested); the CLI surfaced the contract error and the
+unsigned XDR. Wallets were re-funded and the steps above are the successful re-run.
+
 
 ## Baseline and success metric
 
@@ -115,7 +158,7 @@ None yet. No deployment, no pilot, no interview, no measured baseline.
 
 1. **Would the user care if it disappeared?** Plausible from the researched evidence
    (GoFundMe absence, fraud losses, opaque disbursement); untested with a real association.
-2. **Did anyone outside the team use it?** No.
+2. **Did anyone outside the team use it?** No. The testnet run above was performed by the team.
 3. **Before/after measured?** No. The baseline is researched, the metric is defined, the
    count starts in the pilot.
 4. **Value lost without AI?** None; there is no AI component by design.
