@@ -6,9 +6,8 @@ validated (nothing yet). Sources are cited by section of the research dossier.
 
 ## Researched evidence
 
-From `research/04-problems-consumer-creator-services.md` §P32 (community, diaspora and
-mutual-aid fundraising with transparent disbursement) and `research/08-final-selection.md`
-§04 (Kitty Ledger):
+From the research dossier (problem P32) (community, diaspora and
+mutual-aid fundraising with transparent disbursement) and the final selection (section 04) (Kitty Ledger):
 
 - **Workflow today.** Emergency -> WhatsApp group -> M-Pesa/mobile-money contributions to
   one trusted individual's phone -> cash handed over; no ledger, treasurer discretion.
@@ -41,10 +40,10 @@ mutual-aid fundraising with transparent disbursement) and `research/08-final-sel
   22,935 bytes) and pass 63 tests executed inside the Soroban host: 19 registry, 44
   campaign, including the two scenario tests and negative tests for every auth, state,
   deadline and threshold rule.
-- The CLI and its 34 offline tests run without network access; the messy seed CSV yields
+- The CLI and its 35 offline tests run without network access; the messy seed CSV yields
   exactly 40 valid contributors totalling $3,311.82 and rejects 2 rows with reasons.
 - Testnet deployment was **not** attempted: soroban-testnet.stellar.org, Horizon and
-  Friendbot were unreachable from the build environment (see `/TOOLCHAIN.md`).
+  Friendbot were unreachable from the build environment (see `CONTRIBUTING.md`).
 - No organiser, contributor, committee member or biller has seen or used the software.
 
 ## Team assumptions

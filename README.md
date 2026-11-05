@@ -13,9 +13,8 @@ receipts. GoFundMe is unavailable in nearly all of sub-Saharan Africa and cannot
 to African bank accounts; the African alternatives hold the funds themselves and offer
 no committee control. Donors abroad pay 5-8% in remittance fees and cannot see where the
 money went; organisers spend the campaign answering "where did my money go?"; and payment
-fraud is the most common cybercrime in Kenya (Sh29.9B lost in 2025). See
-`research/04-problems-consumer-creator-services.md` §P32 and
-`research/08-final-selection.md` §04 for sources and the full dossier.
+fraud is the most common cybercrime in Kenya (Sh29.9B lost in 2025). Sources
+and the evidence caveats are listed in `VALIDATION.md`.
 
 ## Who it is for
 
@@ -36,7 +35,7 @@ Two strictly Soroban-based smart contracts, a CLI and a public ledger page:
 |---|---|
 | `contracts/biller_registry` | Admin-managed list of payout destinations by category. A biller can only be paid when verified and active. Address changes are two-step with a 24 h delay so a compromised admin key cannot quietly redirect funds. |
 | `contracts/campaign` | Campaigns with goal, deadline, token, committee and threshold. Public append-only contribution ledger; M-of-N payout approval with execution at the threshold; `receipt` event per executed payout; exact refunds when the goal is missed or the organiser cancels before any payout; close at zero balance. |
-| `app/` (`kitty` CLI) | `create`, `contribute`, `propose`, `approve`, `refund`, `close`, `status`, `export`, `csv`. Builds and signs transactions with `@stellar/stellar-sdk`; submits when an RPC is reachable, otherwise prints the unsigned XDR. |
+| `app/` (`kitty` CLI) | `create`, `contribute`, `propose`, `approve`, `refund`, `close`, `status`, `export`, `csv`, plus registry-admin commands `biller-register`, `biller-verify`, `biller-active`, `biller-propose-address`, `biller-apply-address`, `biller-cancel-address`, `biller-status`. Builds and signs transactions with `@stellar/stellar-sdk`; submits when an RPC is reachable, otherwise prints the unsigned XDR. |
 | `app/web/ledger.html` | Plain HTML+JS page: paste a campaign contract id and RPC URL, get the running total, every contribution (with optional display names from a local JSON map), payout proposals with approvals, executed receipts and "verify on Stellar" links to stellar.expert. Also renders an offline `kitty status --json` snapshot. |
 
 Verified behaviour (all in `cargo test`, executed inside the Soroban host):
@@ -53,16 +52,14 @@ Verified behaviour (all in `cargo test`, executed inside the Soroban host):
 ## Quickstart
 
 Prerequisites: Rust 1.94 with the `wasm32v1-none` target, stellar-cli 28, Node 22
-(see `/TOOLCHAIN.md`).
+(see `CONTRIBUTING.md`).
 
 ```bash
-cd stellar/kitty-ledger
-
 # contracts: 63 tests inside the Soroban host, then both wasm files
 cargo test
 stellar contract build            # target/wasm32v1-none/release/{biller_registry,campaign}.wasm
 
-# app: 34 offline tests (no RPC, no keys)
+# app: 35 offline tests (no RPC, no keys)
 cd app && npm install && npm test
 
 # validate the seed pledge list (40 contributors, 2 malformed rows)
@@ -108,7 +105,8 @@ contracts/campaign         campaign contract + tests + test_snapshots/
 app/                       TypeScript CLI (src/), offline tests (test/), web/ledger.html, web/names.json
 data/seed/                 contributors.csv (40 + 2 malformed rows), billers.json, campaign.json
 scripts/                   build.sh, deploy-testnet.sh (not executed here)
-ARCHITECTURE.md VALIDATION.md DEMO.md .env.example
+ARCHITECTURE.md VALIDATION.md DEMO.md CONTRIBUTING.md SECURITY.md LICENSE .env.example
+.github/workflows/ci.yml   cargo test + app tests on every push and pull request
 ```
 
 ## Status
@@ -116,7 +114,8 @@ ARCHITECTURE.md VALIDATION.md DEMO.md .env.example
 ![Validation](https://img.shields.io/badge/validation-passed-success)
 
 **functional locally** (contracts, CLI and ledger page run and are tested against the
-Soroban host and offline fixtures); the contracts are deployed to Testnet at:
+Soroban host and offline fixtures); the contracts have been deployed to Testnet by the maintainers (the addresses below; the deployment
+script was not run in the offline build environment described in `VALIDATION.md`):
 - Biller Registry: [CC57XSCKHKYZ74GJRFZNEV7HS3RA7EPWZF7XEKMB2RTNM6PZ42I3YORC](https://stellar.expert/explorer/testnet/contract/CC57XSCKHKYZ74GJRFZNEV7HS3RA7EPWZF7XEKMB2RTNM6PZ42I3YORC)
 - Campaign: [CBKUPDXDFODFLJBN2CX56GJLTSY6UFEPP3YLUURPTXQW5TIVPE6BQECH](https://stellar.expert/explorer/testnet/contract/CBKUPDXDFODFLJBN2CX56GJLTSY6UFEPP3YLUURPTXQW5TIVPE6BQECH)
 

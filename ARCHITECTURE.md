@@ -155,7 +155,7 @@ submitted).
   hospital's bank or a pharmacy's M-Pesa paybill. Stellar anchors and MoneyGram Access
   already do that leg; the contract only has to pay a registered address.
 - Gifts are $5-$50. Stellar fees are a fraction of a cent, so a $5.55 gift is not eaten
-  by the network (research/08 §04, "Why Stellar").
+  by the network (see VALIDATION.md, "Why Stellar").
 - USDC on Stellar is the unit everyone in the flow understands; no bridging.
 - Soroban's `require_auth` gives committee approvals real signatures without a custom
   multisig contract.

@@ -55,8 +55,8 @@ cd app && npm install && npm test
 ```
 
 ```
-# tests 34
-# pass 34
+# tests 35
+# pass 35
 # fail 0
 ```
 
@@ -174,6 +174,21 @@ Open <http://localhost:8080/ledger.html>. Two ways to fill it:
 
 The page loads `@stellar/stellar-sdk@17.1.0` from jsDelivr; without internet only the
 snapshot path works.
+
+## 6b. Registry admin commands
+
+The registry admin (SECRET_KEY = admin, REGISTRY_CONTRACT_ID set) manages billers from the CLI.
+Add `--dry-run` to print the unsigned XDR instead of submitting.
+
+```bash
+node dist/src/cli.js biller-register --name "Kenyatta National Hospital" --category hospital --address G...
+node dist/src/cli.js biller-verify  --biller 0            # becomes payable; --revoke undoes it
+node dist/src/cli.js biller-active  --biller 0 --deactivate   # immediate stop, no delay
+node dist/src/cli.js biller-propose-address --biller 0 --address G...   # starts the 24 h delay
+node dist/src/cli.js biller-apply-address   --biller 0        # only succeeds after the delay
+node dist/src/cli.js biller-cancel-address  --biller 0
+node dist/src/cli.js biller-status  --biller 0            # record, is_payable, pending address
+```
 
 ## 7. Testnet (written, not executed here)
 
