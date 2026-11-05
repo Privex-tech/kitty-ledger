@@ -173,6 +173,31 @@ export const registryCall = {
     method: "set_verified",
     args: [arg.u32(id), arg.bool(verified)],
   }),
+  setActive: (contractId: string, id: number, active: boolean): Invocation => ({
+    contractId,
+    method: "set_active",
+    args: [arg.u32(id), arg.bool(active)],
+  }),
+  proposeAddress: (contractId: string, id: number, newAddress: string): Invocation => ({
+    contractId,
+    method: "propose_address",
+    args: [arg.u32(id), arg.address(newAddress)],
+  }),
+  applyAddress: (contractId: string, id: number): Invocation => ({
+    contractId,
+    method: "apply_address",
+    args: [arg.u32(id)],
+  }),
+  cancelAddress: (contractId: string, id: number): Invocation => ({
+    contractId,
+    method: "cancel_address",
+    args: [arg.u32(id)],
+  }),
+  pendingAddress: (contractId: string, id: number): Invocation => ({
+    contractId,
+    method: "pending_address",
+    args: [arg.u32(id)],
+  }),
   biller: (contractId: string, id: number): Invocation => ({ contractId, method: "biller", args: [arg.u32(id)] }),
   isPayable: (contractId: string, id: number): Invocation => ({ contractId, method: "is_payable", args: [arg.u32(id)] }),
 };

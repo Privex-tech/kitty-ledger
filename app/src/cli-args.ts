@@ -10,6 +10,13 @@ export const COMMANDS = [
   "approve",
   "refund",
   "close",
+  "biller-register",
+  "biller-verify",
+  "biller-active",
+  "biller-propose-address",
+  "biller-apply-address",
+  "biller-cancel-address",
+  "biller-status",
   "status",
   "export",
   "csv",
@@ -38,13 +45,22 @@ const REQUIRED: Record<Command, string[]> = {
   approve: ["campaign", "payout"],
   refund: ["campaign"],
   close: ["campaign"],
+  "biller-register": ["name", "category", "address"],
+  "biller-verify": ["biller"],
+  "biller-active": ["biller"],
+  "biller-propose-address": ["biller", "address"],
+  "biller-apply-address": ["biller"],
+  "biller-cancel-address": ["biller"],
+  "biller-status": ["biller"],
   status: ["campaign"],
   export: ["campaign"],
   csv: [],
   help: [],
 };
 
-const KNOWN_FLAGS = new Set(["dry-run", "json", "verbose", "help"]);
+export const BILLER_CATEGORIES = ["hospital", "school", "funeral", "utility", "other"] as const;
+
+const KNOWN_FLAGS = new Set(["dry-run", "json", "verbose", "help", "revoke", "deactivate"]);
 
 export function usage(): string {
   return `kitty - Kitty Ledger CLI (community campaigns on Stellar)
@@ -58,6 +74,13 @@ Commands
   approve     --campaign <id> --payout <id>
   refund      --campaign <id> [--claim <G...>]        switch to refunding, or claim one contributor's refund
   close       --campaign <id>
+  biller-register         --name <text> --category <hospital|school|funeral|utility|other> --address <G...>   (registry admin)
+  biller-verify           --biller <id> [--revoke]                 mark a biller payable, or revoke   (registry admin)
+  biller-active           --biller <id> [--deactivate]             re-enable or immediately disable   (registry admin)
+  biller-propose-address  --biller <id> --address <G...>           start the 24 h address change      (registry admin)
+  biller-apply-address    --biller <id>                            apply it once the delay has passed (registry admin)
+  biller-cancel-address   --biller <id>                            drop a pending address change      (registry admin)
+  biller-status           --biller <id>                            read the biller record and whether it is payable
   status      --campaign <id> [--names <file.json>]
   export      --campaign <id> [--format json|csv] [--out <file>] [--names <file.json>] [--from-snapshot <file>]
   csv         <contributors.csv>                     validate a pledge list and print totals
@@ -110,6 +133,9 @@ export function parseArgs(argv: string[]): ParsedArgs {
     }
   }
   if (command === "csv" && positional.length !== 1) throw new UsageError("csv: expected exactly one file path");
+  if ("category" in options && !(BILLER_CATEGORIES as readonly string[]).includes(options.category)) {
+    throw new UsageError(`--category must be one of ${BILLER_CATEGORIES.join(", ")}, got "${options.category}"`);
+  }
   if ("format" in options && !["json", "csv"].includes(options.format)) {
     throw new UsageError(`export: --format must be json or csv, got "${options.format}"`);
   }

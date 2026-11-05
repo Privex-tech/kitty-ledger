@@ -71,6 +71,11 @@ test("every campaign and registry call encodes the argument types the contracts 
   assert.deepEqual(kinds(registryCall.setVerified(REGISTRY, 0, true)), ["scvU32", "scvBool"]);
   assert.deepEqual(kinds(registryCall.isPayable(REGISTRY, 4)), ["scvU32"]);
   assert.equal(registryCall.biller(REGISTRY, 2).method, "biller");
+  assert.deepEqual(kinds(registryCall.setActive(REGISTRY, 1, false)), ["scvU32", "scvBool"]);
+  assert.deepEqual(kinds(registryCall.proposeAddress(REGISTRY, 1, who)), ["scvU32", "scvAddress"]);
+  assert.deepEqual(kinds(registryCall.applyAddress(REGISTRY, 1)), ["scvU32"]);
+  assert.deepEqual(kinds(registryCall.cancelAddress(REGISTRY, 1)), ["scvU32"]);
+  assert.equal(registryCall.pendingAddress(REGISTRY, 1).method, "pending_address");
   assert.throws(() => arg.bytes32(Buffer.alloc(31)), /expected 32 bytes/);
 });
 

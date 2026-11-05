@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import { Keypair, StrKey, TransactionBuilder, Networks, scValToNative } from "@stellar/stellar-sdk";
 import { parseArgs, parseCommittee, parseDeadline, UsageError, usage } from "../src/cli-args.js";
 import { decodeInvocation } from "../src/chain.js";
+import { noteHash } from "../src/hash.js";
 
 const CLI = fileURLToPath(new URL("../src/cli.js", import.meta.url));
 const SEED = fileURLToPath(new URL("../../../data/seed/contributors.csv", import.meta.url));
@@ -19,6 +20,13 @@ test("parses every command with its required options", () => {
     [["refund", "--campaign", "0"], "refund"],
     [["refund", "--campaign", "0", "--claim", "GABC"], "refund"],
     [["close", "--campaign", "0"], "close"],
+    [["biller-register", "--name", "Kenyatta Hospital", "--category", "hospital", "--address", "GA"], "biller-register"],
+    [["biller-verify", "--biller", "0", "--revoke"], "biller-verify"],
+    [["biller-active", "--biller", "0", "--deactivate"], "biller-active"],
+    [["biller-propose-address", "--biller", "1", "--address", "GA"], "biller-propose-address"],
+    [["biller-apply-address", "--biller", "1"], "biller-apply-address"],
+    [["biller-cancel-address", "--biller", "1"], "biller-cancel-address"],
+    [["biller-status", "--biller", "1"], "biller-status"],
     [["status", "--campaign", "0", "--json"], "status"],
     [["export", "--campaign", "0", "--format", "csv", "--out", "x.csv"], "export"],
     [["csv", "data/seed/contributors.csv"], "csv"],
@@ -43,6 +51,11 @@ test("rejects unknown commands, missing options and bad values", () => {
   assert.throws(() => parseArgs(["approve", "--campaign", "x", "--payout", "0"]), /--campaign must be a non-negative integer/);
   assert.throws(() => parseArgs(["approve", "--campaign", "0", "--payout", "-1"]), /--payout must be a non-negative integer/);
   assert.throws(() => parseArgs(["export", "--campaign", "0", "--format", "xml"]), /--format must be json or csv/);
+  assert.throws(
+    () => parseArgs(["biller-register", "--name", "X", "--category", "bank", "--address", "GA"]),
+    /--category must be one of hospital, school, funeral, utility, other/,
+  );
+  assert.throws(() => parseArgs(["biller-verify"]), /missing required option --biller/);
   assert.throws(() => parseArgs(["csv"]), /expected exactly one file path/);
   assert.throws(() => parseArgs(["status", "--campaign", ""]), /missing required option --campaign/);
   assert.throws(() => parseArgs(["status", "--", "0"]), /malformed option/);
@@ -133,4 +146,38 @@ test("kitty status without a reachable RPC exits non-zero with a readable error"
     assert.equal(e.status, 1);
     assert.ok(String(e.stderr).trim().length > 0);
   }
+});
+
+test("kitty biller commands build registry invocations offline", () => {
+  const kp = Keypair.random();
+  const REGISTRY = StrKey.encodeContract(Buffer.alloc(32, 9));
+  const target = Keypair.random().publicKey();
+  const run = (argv: string[]) => {
+    const out = execFileSync(process.execPath, [CLI, ...argv, "--dry-run"], {
+      encoding: "utf8",
+      env: { ...process.env, SECRET_KEY: kp.secret(), REGISTRY_CONTRACT_ID: REGISTRY, NETWORK_PASSPHRASE: Networks.TESTNET },
+    });
+    const tx = TransactionBuilder.fromXDR(out.trim().split("\n")[1], Networks.TESTNET);
+    return decodeInvocation(tx as any);
+  };
+
+  const reg = run(["biller-register", "--name", "Kenyatta  Hospital", "--category", "hospital", "--address", target]);
+  assert.equal(reg.method, "register_biller");
+  assert.equal(reg.contractId, REGISTRY);
+  assert.equal(Buffer.from(scValToNative(reg.args[0])).toString("hex"), noteHash("Kenyatta Hospital").toString("hex"));
+  assert.equal(scValToNative(reg.args[1]), "hospital");
+  assert.equal(scValToNative(reg.args[2]), target);
+
+  const verify = run(["biller-verify", "--biller", "3"]);
+  assert.deepEqual([verify.method, scValToNative(verify.args[0]), scValToNative(verify.args[1])], ["set_verified", 3, true]);
+  const revoke = run(["biller-verify", "--biller", "3", "--revoke"]);
+  assert.equal(scValToNative(revoke.args[1]), false);
+
+  const off = run(["biller-active", "--biller", "3", "--deactivate"]);
+  assert.deepEqual([off.method, scValToNative(off.args[1])], ["set_active", false]);
+
+  const propose = run(["biller-propose-address", "--biller", "2", "--address", target]);
+  assert.deepEqual([propose.method, scValToNative(propose.args[0]), scValToNative(propose.args[1])], ["propose_address", 2, target]);
+  assert.equal(run(["biller-apply-address", "--biller", "2"]).method, "apply_address");
+  assert.equal(run(["biller-cancel-address", "--biller", "2"]).method, "cancel_address");
 });

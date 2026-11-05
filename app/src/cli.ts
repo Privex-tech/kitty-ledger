@@ -11,6 +11,7 @@ import { approvalsRemaining } from "./approvals.js";
 import {
   buildTransaction,
   campaignCall,
+  registryCall,
   fetchSnapshot,
   simulateView,
   submit,
@@ -236,6 +237,64 @@ export async function main(argv: string[]): Promise<void> {
       const kp = signer(env);
       const inv = campaignCall.close(need(env.campaignContractId, "CAMPAIGN_CONTRACT_ID"), Number(args.options.campaign));
       await sendOrPrint(env, args, inv, kp);
+      return;
+    }
+
+    case "biller-register": {
+      const kp = signer(env);
+      const inv = registryCall.registerBiller(
+        need(env.registryContractId, "REGISTRY_CONTRACT_ID"),
+        noteHash(args.options.name),
+        args.options.category,
+        args.options.address,
+      );
+      await sendOrPrint(env, args, inv, kp);
+      return;
+    }
+
+    case "biller-verify": {
+      const kp = signer(env);
+      const registry = need(env.registryContractId, "REGISTRY_CONTRACT_ID");
+      await sendOrPrint(env, args, registryCall.setVerified(registry, Number(args.options.biller), !args.flags.has("revoke")), kp);
+      return;
+    }
+
+    case "biller-active": {
+      const kp = signer(env);
+      const registry = need(env.registryContractId, "REGISTRY_CONTRACT_ID");
+      await sendOrPrint(env, args, registryCall.setActive(registry, Number(args.options.biller), !args.flags.has("deactivate")), kp);
+      return;
+    }
+
+    case "biller-propose-address": {
+      const kp = signer(env);
+      const registry = need(env.registryContractId, "REGISTRY_CONTRACT_ID");
+      await sendOrPrint(env, args, registryCall.proposeAddress(registry, Number(args.options.biller), args.options.address), kp);
+      return;
+    }
+
+    case "biller-apply-address": {
+      const kp = signer(env);
+      const registry = need(env.registryContractId, "REGISTRY_CONTRACT_ID");
+      await sendOrPrint(env, args, registryCall.applyAddress(registry, Number(args.options.biller)), kp);
+      return;
+    }
+
+    case "biller-cancel-address": {
+      const kp = signer(env);
+      const registry = need(env.registryContractId, "REGISTRY_CONTRACT_ID");
+      await sendOrPrint(env, args, registryCall.cancelAddress(registry, Number(args.options.biller)), kp);
+      return;
+    }
+
+    case "biller-status": {
+      const cfg: ChainConfig = { rpcUrl: env.rpcUrl, networkPassphrase: env.networkPassphrase };
+      const registry = need(env.registryContractId, "REGISTRY_CONTRACT_ID");
+      const id = Number(args.options.biller);
+      const biller = await simulateView(cfg, registryCall.biller(registry, id));
+      const payable = await simulateView(cfg, registryCall.isPayable(registry, id));
+      const pending = await simulateView(cfg, registryCall.pendingAddress(registry, id));
+      console.log(JSON.stringify({ biller, payable, pending_address: pending ?? null }, bigintReplacer, 2));
       return;
     }
 
